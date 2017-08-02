@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "Chetan <chetan.narian@gmail.com>",
-  "private": true,
   "main": "app.js",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "bundlesize": "bundlesize",
-    "flow": "flow",
-    "test": "npm run flow & npm run bundlesize"
+    "test": "flow",
+    "test:size": "bundlesize"
   },
   "dependencies": {
     "electron": "^1.6.11",
