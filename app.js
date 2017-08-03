@@ -8,8 +8,6 @@ const path = require('path');
 
 let mainWindow;
 
-//
-
 app.on('ready', () => {
 	mainWindow = new BrowserWindow({
 		width: 800,
@@ -26,13 +24,6 @@ app.on('ready', () => {
   mainWindow.webContents.openDevTools();
 
 });
-
-
-/**************************************/
-
-
-
-
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
