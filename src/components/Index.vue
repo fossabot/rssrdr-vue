@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ title }}</h1>
+
+    <input type="text" placeholder="Enter feed url" v-model="feed_url">
     <button type="button" v-on:click="sync" name="button">Sync!</button>
     <br><br>
     <router-link to="/myfeed">My Feed</router-link>
@@ -8,16 +10,26 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'index',
   data () {
     return {
-      title: 'RSSRDR'
+      title: 'RSSRDR',
+      feed_url: ''
     }
   },
   methods: {
     sync: function () {
-      alert('Syncing..')
+      axios.post('http://express.rssrdr.net:4000/saveFeed/?url='+this.feed_url)
+      .then(response => {
+        console.log(response.data);
+        this.feed_url = '';
+      })
+      .catch(e => {
+        console.error(e);
+      });
     }
   }
 }

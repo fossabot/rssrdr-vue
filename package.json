@@ -12,6 +12,7 @@
     "test:size": "bundlesize"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "electron": "^1.6.11",
     "flow-bin": "^0.51.1",
     "url": "^0.11.0",

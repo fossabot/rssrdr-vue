@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
+// Vue Components
 import Index from '@/components/Index';
 import MyFeed from '@/components/MyFeed';
 

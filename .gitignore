@@ -4,3 +4,6 @@ node_modules
 # Ignore Folders
 dist
 .DS_Store
+
+# Ignore Files
+*.log
