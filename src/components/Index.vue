@@ -41,7 +41,6 @@ export default {
     // fetch the data when the view is created and the data is
     // already being observed
     this.fetchData()
-    // this.fetchFeed('https://nodesource.com/blog/rss')
   },
   methods: {
     fetchData () {
@@ -59,6 +58,7 @@ export default {
       axios.post('http://express.rssrdr.net:4000/saveRSSLink/?url='+this.feed_url)
       .then(response => {
         this.feed_url = '';
+        this.fetchData();
       })
       .catch(e => {
         console.error(e);
