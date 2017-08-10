@@ -13,7 +13,6 @@
       <ol class="selected-feed">
         <li v-for="entry in selectedFeed.entries">
           <a target="_blank" :href="entry.link">{{entry.title}}</a>
-          <div>{{entry.content}}</div>
         </li>
       </ol>
     </div>
@@ -24,7 +23,10 @@
 <script>
 import axios from 'axios';
 import _ from 'lodash';
+import PouchDB from 'pouchdb';
+const name = 'chetan';
 
+const pouchdb = new PouchDB('rssrdr');
 
 export default {
   name: 'index',
@@ -40,32 +42,63 @@ export default {
   created () {
     // fetch the data when the view is created and the data is
     // already being observed
-    this.fetchData()
+
+    this.fetchData();
   },
   methods: {
     fetchData () {
-      axios.get('http://express.rssrdr.net:4000/getSavedLinks/?id=5983c64cfee97317acef37ef')
-      .then(response => {
-        if(response && response.data) {
-          this.urls = response.data.urls;
+      const self = this;
+
+      pouchdb.get(name).then(function (doc) {
+        self.urls = doc.urls;
+      }).catch(function (err) {
+        if(err.status === 404) {
+          pouchdb.put({
+            _id: 'chetan',
+            urls: []
+          }).then(function (response) {
+            console.log(response);
+          }).catch(function (err) {
+            console.log(err);
+          });
         }
-      })
-      .catch(e => {
-        console.error(e);
       });
     },
     sync () {
-      axios.post('http://express.rssrdr.net:4000/saveRSSLink/?url='+this.feed_url)
+      const self = this
+      let p_urls = [];
+
+      axios.get('https://rssrdr-express-eoluokedqs.now.sh/getFeedData?url='+self.feed_url)
       .then(response => {
-        this.feed_url = '';
-        this.fetchData();
+        const feed_data = response.data;
+        pouchdb.get(name)
+        .then(function (doc) {
+
+          if(doc.urls.length > 0) {
+            p_urls = doc.urls;
+          }
+          p_urls.push({'name': feed_data.title, 'url': self.feed_url});
+          self.feed_url = '';
+
+          return pouchdb.put({
+            _id: name,
+            _rev: doc._rev,
+            urls: p_urls
+          });
+        })
+        .then(function(doc) {
+          self.fetchData();
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
       })
       .catch(e => {
         console.error(e);
       });
     },
     fetchFeed (url) {
-      axios.get('http://express.rssrdr.net:4000/getFeedData/?url='+url)
+      axios.get('https://rssrdr-express-eoluokedqs.now.sh/getFeedData?url='+url)
       .then(response => {
         if(response && response.data) {
           this.selectedFeed = response.data;
