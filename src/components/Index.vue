@@ -1,14 +1,18 @@
 <template>
   <div class="container">
-    <h1>{{ title }}</h1>
+    <div class="pull-left">
+      <h1>{{ title }}</h1>
 
-    <input type="text" placeholder="Enter feed url" v-model="feed_url">
-    <button type="button" v-on:click="sync" name="button">Sync!</button>
-    <br><br>
-    <div class="feed" v-for="feed in urls">
-      <input type="radio" v-on:click="selectFeed" v-model="selected" name="feed" :value="feed.name"> {{ feed.name }}
+      <input type="text" class="add-url-input pull-left" placeholder="Enter feed url" v-model="feed_url">
+      <span class="btn add-url pull-left" v-on:click="sync">Feed</span>
+
+      <br><br>
+      <div class="feed" v-for="(feed, index) in urls">
+        <input type="radio" v-on:click="selectFeed" :id="index" v-model="selected" name="feed" :value="feed.name">
+        <label :for="index">{{ feed.name }}</label>
+      </div>
     </div>
-    <div class="feed-container">
+    <div class="feed-container pull-left">
       <h3>{{selectedFeed.title}}</h3>
       <ol class="selected-feed">
         <li v-for="entry in selectedFeed.entries">
@@ -24,8 +28,8 @@
 import axios from 'axios';
 import _ from 'lodash';
 import PouchDB from 'pouchdb';
-const name = 'chetan';
 
+const name = 'chetan';
 const pouchdb = new PouchDB('rssrdr');
 
 export default {
@@ -54,7 +58,7 @@ export default {
       }).catch(function (err) {
         if(err.status === 404) {
           pouchdb.put({
-            _id: 'chetan',
+            _id: name,
             urls: []
           }).then(function (response) {
             console.log(response);
@@ -140,10 +144,34 @@ li {
 }
 
 a {
-  color: #42b983;
+  color: #2994B2;
+}
+
+.pull-left {
+    float: left;
 }
 
 .feed {
+  text-align: left;
+}
+
+.add-url-input {
+  width: 200px;
+  height: 30px;
+  border: 2px solid #12CC94;
+  font-size: 16px;
+  padding-left: 5px;
+}
+
+.btn {
+  background-color: #12CC94;
+  border: none;
+  color: white;
+  padding: 7px 32px;
   text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
 }
 </style>
