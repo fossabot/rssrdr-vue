@@ -5,10 +5,11 @@
   "author": "Chetan <chetan.narian@gmail.com>",
   "main": "app.js",
   "scripts": {
+    "build": "node build/build.js",
     "create:package": "electron-packager . rssrdr",
     "dev": "node build/dev-server.js",
+    "electron": "electron .",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js",
     "test": "flow",
     "test:size": "bundlesize"
   },
