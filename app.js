@@ -20,9 +20,6 @@ app.on('ready', () => {
     'protocol': 'file:',
     'slashes': true
   }));
-
-  mainWindow.webContents.openDevTools();
-
 });
 
 // Quit when all windows are closed.
