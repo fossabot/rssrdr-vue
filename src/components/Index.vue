@@ -93,7 +93,7 @@ export default {
         pouchdb.get(name)
         .then(function (doc) {
 
-          if(doc.urls.length > 0) {
+          if(doc.urls && doc.urls.length > 0) {
             p_urls = doc.urls;
           }
           p_urls.push({'name': feed_data.title, 'url': self.feed_url});
@@ -197,10 +197,13 @@ a {
   width: 30%;
   border-right: 2px solid #12CC94;
   padding: 0 1em;
+  position: fixed;
+  height: 100%;
 }
 
 .feed-container {
   width: 70%;
+  margin-left: 30%;
 }
 
 .btn {
