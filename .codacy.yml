@@ -1,0 +1,5 @@
+exclude_paths:
+  - build02sep
+  - build17sep
+  - build23sep
+  - build29sep
