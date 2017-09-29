@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'index',
+  name: 'myfeed',
   data () {
     return {
       title: 'RSSRDR'

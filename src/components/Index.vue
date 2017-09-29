@@ -1,6 +1,8 @@
 <template>
   <div class="container flex-stretch">
-    <div class="feed-content">
+    <div class="feed-content" v-bind:class="{'collapse': isActive}">
+      <span ref="collapse" class="chevron-arrow hidden" v-on:click="_collapse"></span>
+
       <h3>{{ title }}</h3>
       <span class="label label-default underline">Your favourite rss feed reader</span>
 
@@ -26,10 +28,12 @@
           </div>
         </div>
       </div>
-      <h3>{{selectedFeed.title}}</h3>
+      <h4>{{selectedFeed.title}}</h4>
       <ol class="selected-feed">
         <li v-for="entry in selectedFeed.entries">
           <a target="_blank" :href="entry.link">{{entry.title}}</a>
+          <span v-if="entry.creator"> by {{entry.creator}}</span>
+          <div v-cloak="" v-html="entry.content" class=""></div>
         </li>
       </ol>
     </div>
@@ -55,7 +59,8 @@ export default {
       selected: '',
       selectedFeed: {},
       feedDataFlag: true,
-      showLoader: false
+      showLoader: false,
+      isActive: false
     }
   },
   created () {
@@ -87,12 +92,21 @@ export default {
       const self = this
       let p_urls = [];
 
+      var regex = /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
+      if(!regex.test(self.feed_url)) {
+        this.$notify({
+          group: 'notifications',
+          text: 'Please enter a valid url!',
+          type: 'error',
+        });
+        return;
+      }
+
       axios.get('https://rssrdr-express-eoluokedqs.now.sh/getFeedData?url='+self.feed_url)
       .then(response => {
         const feed_data = response.data;
         pouchdb.get(name)
         .then(function (doc) {
-
           if(doc.urls && doc.urls.length > 0) {
             p_urls = doc.urls;
           }
@@ -129,6 +143,12 @@ export default {
         }
       })
       .catch(e => {
+        this.$notify({
+          group: 'notifications',
+          text: 'Something went wrong!',
+          type: 'error',
+        });
+
         console.log(e);
       });
     },
@@ -139,6 +159,9 @@ export default {
         slctd = _.find(this.urls, function(url){ return url.name == u_slctd});
         this.fetchFeed(slctd.url);
       }
+    },
+    _collapse () {
+      this.isActive = !this.isActive;
     }
   }
 }
@@ -172,7 +195,7 @@ a {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .container {
@@ -199,6 +222,27 @@ a {
   padding: 0 1em;
   position: fixed;
   height: 100%;
+}
+
+.feed-content.collapse {
+  width: 0;
+}
+
+.chevron-arrow {
+  cursor: pointer;
+  display: inline-block;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  width: 15px; height: 15px;
+  transform: rotate(-225deg);
+  position: absolute;
+  top: 15px;
+  right: 5px;
+}
+
+.collapse .chevron-arrow {
+  transform: rotate(-45deg);
+  right: 10px;
 }
 
 .feed-container {
