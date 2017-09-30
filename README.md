@@ -1,5 +1,6 @@
 # rssrdr-vue
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6871b0b7e77d450780c1d735250cfc63)](https://www.codacy.com/app/chetanraj/rssrdr-vue?utm_source=github.com&utm_medium=referral&utm_content=chetanraj/rssrdr-vue&utm_campaign=badger)
 [![CircleCI](https://circleci.com/gh/chetanraj/rssrdr-vue.svg?style=svg)](https://circleci.com/gh/chetanraj/rssrdr-vue) [![Build Status](https://travis-ci.org/chetanraj/rssrdr-vue.svg?bran̨ch=master)](https://travis-ci.org/chetanraj/rssrdr-vue)
 
 ## Introduction
