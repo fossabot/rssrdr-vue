@@ -5468,10 +5468,6 @@ vary@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.1.tgz#67535ebb694c1d52257457984665323f587e8d37"
 
-vee-validate@^2.0.0-rc.18:
-  version "2.0.0-rc.18"
-  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-2.0.0-rc.18.tgz#30857abeb2ba87e52d3e66c09b35a78e66419527"
-
 velocity-animate@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/velocity-animate/-/velocity-animate-1.5.0.tgz#fc8771d8dfe1136ff02a707e10fbb0957c4b030f"
@@ -5545,6 +5541,10 @@ vue-template-es2015-compiler@^1.2.2:
 vue@^2.3.3:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.4.2.tgz#a9855261f191c978cc0dc1150531b8d08149b58c"
+
+vuetify@^0.15.7:
+  version "0.15.7"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-0.15.7.tgz#a712d646485d22dfd8b7ab2e70fb378582beb9d7"
 
 vuvuzela@1.0.3:
   version "1.0.3"

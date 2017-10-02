@@ -7,9 +7,11 @@ import App from './App';
 import router from './router';
 
 // Other Stuff
+import Vuetify from 'vuetify';
 import Notifications from 'vue-notification';
 
 // Extra Other Stuff
+Vue.use(Vuetify);
 Vue.use(Notifications);
 
 Vue.config.productionTip = false;
