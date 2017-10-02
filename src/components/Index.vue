@@ -18,11 +18,11 @@
     </v-list>
 
   </v-navigation-drawer>
-  <v-toolbar class="app-green white-text" fixed>
+  <v-toolbar class="app-green white-text" dark fixed>
     <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     <v-toolbar-title>{{title}} - <small>Your favourite rss feed reader</small></v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn icon>
+    <v-btn @click="openGithubRepo" icon dark>
       <v-icon>favorite</v-icon>
     </v-btn>
   </v-toolbar>
@@ -36,7 +36,7 @@
           <v-list-tile @click="openUrl(entry.link)">
             <v-list-tile-content>
               <v-list-tile-title>{{entry.title}}</v-list-tile-title>
-              <v-list-tile-sub-title>by {{entry.creator}}</v-list-tile-sub-title>
+              <v-list-tile-sub-title v-if="entry.creator">by {{entry.creator}}</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
         </template>
@@ -177,6 +177,9 @@ export default {
     openUrl(url) {
       console.log('we');
       window.open(url);
+    },
+    openGithubRepo() {
+      window.open('https://github.com/chetanraj/rssrdr-vue');
     }
   }
 }
