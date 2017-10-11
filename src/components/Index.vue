@@ -1,6 +1,6 @@
 <template>
 <v-app id="rssrdr" toolbar footer>
-  <v-navigation-drawer persistent v-model="drawer" light enable-resize-watcher fixed class="pa-4">
+  <v-navigation-drawer persistent v-model="drawer" light enable-resize-watcher fixed temporary class="pa-4">
 
     <!-- Add Feed URL -->
     <v-text-field name="feed_url" label="" placeholder="Enter feed url" v-model="feed_url"></v-text-field>
@@ -27,9 +27,9 @@
     </v-btn>
   </v-toolbar>
   <main>
-    <v-container fluid>
+    <v-container fluid class="pt-5">
       <v-progress-circular indeterminate v-bind:width="3" v-bind:class="{'hidden' : !showLoader }" class="green--text center"></v-progress-circular>
-      <h4>{{selectedFeed.title}}</h4>
+      <h4 class="pt-5">{{selectedFeed.title}}</h4>
       <v-list v-if="selectedFeed.entries" three-line class="pt-0">
         <template v-for="(entry, index) in selectedFeed.entries">
           <v-divider v-if="index"></v-divider>
@@ -43,9 +43,6 @@
       </v-list>
     </v-container>
   </main>
-  <v-footer class="app-green">
-    <span class="white--text">© {{year()}}</span>
-  </v-footer>
 </v-app>
 </template>
 
