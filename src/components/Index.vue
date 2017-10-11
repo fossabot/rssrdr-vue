@@ -108,7 +108,7 @@ export default {
         return;
       }
 
-      axios.get('https://rssrdr-express-eoluokedqs.now.sh/getFeedData?url=' + self.feed_url)
+      axios.get('https://2xq1ihp3c2.execute-api.us-east-2.amazonaws.com/dev/getFeedData?url=' + self.feed_url)
         .then(response => {
           const feed_data = response.data;
           pouchdb.get(name)
@@ -143,7 +143,7 @@ export default {
       this.selectedFeed = {};
       this.showLoader = true;
       //
-      axios.get('https://rssrdr-express-eoluokedqs.now.sh/getFeedData?url=' + url)
+      axios.get('https://2xq1ihp3c2.execute-api.us-east-2.amazonaws.com/dev/getFeedData?url=' + url)
         .then(response => {
           if (response && response.data) {
             this.showLoader = false;
